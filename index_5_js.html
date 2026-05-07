@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>집반찬</title>
+    <style>
+      /* ========== Reset ========== */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      ul,
+      ol,
+      li {
+        list-style: none;
+      }
+
+      body {
+        font-family: "맑은 고딕";
+        color: #000;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      /* ========== Layout 공통 컨테이너 ========== */
+      .container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: space-between;
+      }
+
+      /* ========== Header ========== */
+      header {
+        min-height: 150px;
+        /* 데모용 고정 높이 */
+        align-items: center;
+      }
+
+      /* header 내부 요소 배치 */
+      .search-box {
+        width: 350px;
+        height: 60px;
+        background: #fff;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .search-box > input {
+        border: none;
+        outline: none;
+        padding: 8px;
+        width: 180px;
+        font-size: 15px;
+      }
+
+      .search-box > img {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        margin: 10px 10px 0px;
+        width: 40px;
+        height: 40px;
+      }
+
+      .right-box {
+        width: 400px;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .logo {
+        width: 350px;
+        height: 70px;
+        font-size: 28px;
+        text-align: center;
+      }
+
+      .login {
+        width: 100%;
+        height: 30px;
+        font-size: 14px;
+      }
+
+      /* 로그인 파트 (위) */
+      .login > ul {
+        margin-bottom: 6px;
+        display: flex;
+        justify-content: flex-end;
+        font-size: 12px;
+        gap: 15px;
+      }
+
+      .login > ul > li > a {
+        color: #666;
+      }
+
+      .menu {
+        width: 100%;
+        height: 40px;
+        margin: 35px 0 0 0px;
+      }
+
+      /* 메뉴(아래) */
+      .menu > ul {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 15px;
+        color: #000;
+        gap: 15px;
+      }
+
+      .menu > ul > li > a {
+        display: flex;
+        justify-content: center;
+        align-content: baseline;
+        align-items: center;
+        color: #000;
+        gap: 5px;
+        font-weight: bold;
+      }
+
+      /* 메뉴 아이콘 크기 */
+      .menu img {
+        width: 25px;
+        height: 25px;
+      }
+
+      /* ========== Slider ========== */
+      #slider {
+        width: 100%;
+        min-height: 450px;
+        overflow: hidden;
+      }
+
+      #slider > img {
+        width: 100%;
+        min-height: 450px;
+        display: block;
+      }
+
+      /* ========== Main ========== */
+      main {
+        min-height: 600px;
+        /* 나중에 콘텐츠 늘어남 */
+      }
+
+      .section-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        gap: 15px;
+        margin: 30px 0px;
+      }
+
+      .banchan {
+        width: 100%;
+        min-height: 1000px;
+      }
+
+      div > h3 {
+        width: 100%;
+        font-size: 27px;
+        text-align: center;
+        line-height: 30px;
+      }
+
+      div > p {
+        width: 100%;
+        font-size: 17px;
+        text-align: center;
+        color: #666;
+        margin-bottom: 25px;
+      }
+
+      .product-card {
+        width: 280px;
+        height: 395px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .product-card > img,
+      .md-card > img {
+        width: 100%;
+        margin: 0 0 15px 0;
+      }
+
+      .product-card > h4,
+      .md-card > h4 {
+        font-size: 17px;
+        color: #000;
+      }
+
+      .product-card > p,
+      .md-card > p {
+        font-size: 14px;
+        color: #666;
+        text-align: left;
+      }
+
+      .product-card > h5,
+      .md-card > h5 {
+        font-size: 17px;
+        color: #000;
+      }
+
+      .md-card {
+        width: 280px;
+        height: 515px;
+      }
+
+      .kid-banchan {
+        width: 100%;
+        min-height: 600px;
+      }
+
+      .new-banchan {
+        width: 100%;
+        min-height: 1000px;
+      }
+
+      .banner {
+        width: 100%;
+        min-height: 200px;
+      }
+
+      .banner > a > img {
+        width: 380px;
+        height: 130px;
+      }
+
+      .md-banchan {
+        width: 100%;
+        min-height: 750px;
+      }
+
+      .md-banchan > ul {
+        width: 100%;
+        min-height: 45px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 0 0 30px 0;
+      }
+
+      .md-banchan > ul > li {
+        background-color: #ddd;
+        padding: 10px 20px 0px;
+        border-radius: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        display: block;
+      }
+
+      .md-banchan > ul > li > a {
+        color: #333;
+      }
+
+      /* 선택된(active) 메뉴만 흰 글자 */
+      .md-banchan > ul > li.active > a {
+        color: #fff;
+      }
+
+      .md-banchan > ul > li.active {
+        background-color: #0d5611;
+        color: #fff;
+      }
+
+      /* ========== Footer ========== */
+      footer {
+        min-height: 200px;
+        display: flex;
+        gap: 40px;
+      }
+
+      .footer-left {
+        flex: 1;
+      }
+
+      .footer-right {
+        flex: 2;
+      }
+
+      /* 글씨 약한 스타일 */
+      .footer-left p,
+      .footer-right p {
+        margin: 5px 0;
+        line-height: 1.5;
+        text-align: left;
+        font-size: 12px;
+      }
+
+      .footer-left .tel {
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .footer-right .links a {
+        margin: 0 5px;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .footer-right .links a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="container">
+      <div class="search-box">
+        <input type="text" placeholder="반찬을 입력해주세요" />
+        <img src="img/search_icon.png" alt="" />
+      </div>
+      <div class="logo"><img src="img/logo.png" alt="" /></div>
+      <div class="right-box">
+        <div class="login">
+          <ul>
+            <li><a href="#">로그인</a></li>
+            <li><a href="#">회원가입</a></li>
+            <li><a href="#">고객센터</a></li>
+          </ul>
+        </div>
+        <nav class="menu">
+          <ul>
+            <li>
+              <a href="#"><img src="img/icon1.png" alt="" />브랜드</a>
+            </li>
+            <li>
+              <a href="#"><img src="img/icon2.png" alt="" />반찬보기</a>
+            </li>
+            <li>
+              <a href="#"><img src="img/icon3.png" alt="" />장바구니</a>
+            </li>
+            <li>
+              <a href="#"><img src="img/icon4.png" alt="" />내정보</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="slider">
+      <img id="bannerImg" src="img/banner/banner_5.png" alt="" />
+    </section>
+
+    <main class="container">
+      <div class="banchan section-grid">
+        <h3>부담없는 알뜰 반찬</h3>
+        <p>착한 가격으로 챙기는 든든 한 끼</p>
+
+        <!-- 여기 안에 JS로 카드들이 채워짐 -->
+        <!-- <a href="#">
+        <div class="product-card">
+          <img src="img/01_banchan/banchan1.jpg" alt="">
+          <h4>무나물</h4>
+          <p>푹 익혀서 먹기 편해요</p>
+          <h5>2800원</h5>
+        </div>
+      </a> -->
+      </div>
+
+      <div class="kid-banchan section-grid">
+        <h3>어린이 반찬</h3>
+        <p>착한 가격으로 챙기는 든든 한 끼</p>
+
+        <!-- 여기 안에 JS로 카드들이 채워짐 -->
+
+        <!-- <a href="#">
+        <div class="product-card">
+          <img src="img/02_kid_banchan/kid_banchan1.jpg" alt="">
+          <h4>새콤 오이무생채</h4>
+          <p>아이들이 먹기 좋은 깔끔한 무생채</p>
+          <h5>2800원</h5>
+        </div>
+      </a> -->
+      </div>
+
+      <div class="new-banchan section-grid">
+        <h3>새로 나온 반찬</h3>
+        <p>착한 가격으로 챙기는 든든 한 끼</p>
+
+        <!-- 여기 안에 JS로 카드들이 채워짐 -->
+
+        <!-- <a href="#">
+        <div class="product-card">
+          <img src="img/03_new_banchan/new_banchan1.jpg" alt="">
+          <h4>새콤 오이무생채</h4>
+          <p>아이들이 먹기 좋은 깔끔한 무생채</p>
+          <h5>2800원</h5>
+        </div>
+      </a> -->
+      </div>
+
+      <div class="banner section-grid">
+        <a href="#"><img src="img/banner/banner1.png" alt="" /></a>
+        <a href="#"><img src="img/banner/banner2.png" alt="" /></a>
+        <a href="#"><img src="img/banner/banner3.png" alt="" /></a>
+      </div>
+
+      <div class="md-banchan section-grid">
+        <h3>MD 추천반찬</h3>
+        <p>이번 주 가장 추천하는 제품만 골라드려요</p>
+        <ul>
+          <li><a href="#">비빔밥</a></li>
+          <li><a href="#">국/찌개/탕</a></li>
+          <li><a href="#">어린이 반찬</a></li>
+          <li><a href="#"> 볶음</a></li>
+          <li><a href="#"> 무침</a></li>
+          <li><a href="#"> 메인요리</a></li>
+          <li><a href="#"> 조림</a></li>
+        </ul>
+
+        <!-- 여기 안에 JS로 카드들이 채워짐 -->
+
+        <!-- <a href="#">
+        <div class="md-card">
+          <img src="img/04_md_banchan/bibim/bibim_1.jpg" alt="">
+          <h4>새콤 오이무생채</h4>
+          <p>아이들이 먹기 좋은 깔끔한 무생채</p>
+          <h5>2800원</h5>
+        </div>
+      </a> -->
+      </div>
+    </main>
+
+    <footer class="container">
+      <div class="footer-left">
+        <h4>고객센터</h4>
+        <p class="tel">1588-3754</p>
+        <p class="email">zipbanchan@sannamchon.co.kr</p>
+
+        <p class="time">
+          평일 08:30~17:30 / 토요일 08:30~12:00<br />
+          점심시간 12:00~13:00<br />
+          일요일, 공휴일은 휴무입니다.
+        </p>
+      </div>
+
+      <div class="footer-right">
+        <h4>집반찬연구소</h4>
+        <p>
+          인천광역시 서구 가석로 26(가좌동) 집반찬연구소 대표자: 박종철<br />
+          사업자등록번호: 121-86-17743 통신판매업 신고번호: 제
+          2023-인천서구-3834 호 개인정보보호책임자: 정문채<br />
+          제품 문의: zipbanchan@sannamchon.co.kr
+        </p>
+
+        <p class="links">
+          <a href="#">집반찬연구소 소개</a> | <a href="#">이용약관</a> |
+          <a href="#">개인정보처리방침</a>
+        </p>
+
+        <p class="copy">Copyright © SANNAMCHON CORP. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!--3초 마다 배너 이미지 변경 -->
+    <script>
+      `이 스크립트의 목적은 웹 페이지의 배너 이미지를 3초마다 자동으로 변경하는 것입니다. 
+    아래는 코드의 주요 기능과 동작 방식에 대한 설명입니다.`;
+      // 배너 이미지 목록
+      const banners = [
+        "img/banner/banner_1.png",
+        "img/banner/banner_2.png",
+        "img/banner/banner_3.png",
+        "img/banner/banner_4.png",
+        "img/banner/banner_5.png",
+      ];
+
+      let index = 0; // 현재 배너번호
+
+      // 3초마다 자동 변경
+      setInterval(() => {
+        // 다음 배너로 이동
+        index++;
+
+        // 5 → 0으로 초기화
+        if (index >= banners.length) {
+          index = 0;
+        }
+
+        // 이미지 변경
+        document.getElementById("bannerImg").src = banners[index];
+      }, 3000); // 3000ms = 3초
+    </script>
+
+    <!-- 부담 없는 알뜰 반찬 -->
+    <script>
+      //01_banchan.json
+      fetch("https://dino-21.github.io/zipbanchan/json/01_banchan.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const box = document.querySelector(".banchan"); <!-- 클래스 속성이 banchan인 요소에 상품 노출 -->
+          data.forEach((item) => {
+            box.innerHTML += `
+            <a href="#">
+              <div class="product-card">
+                <img src="${item.main_img}" alt="${item.name}">
+                <h4>${item.name}</h4>
+                <p>${item.description}</p>
+                <h5>${item.price}원</h5>
+              </div>
+            </a>
+          `;
+          });
+        });
+    </script>
+
+    <!-- 어린이 반찬  -->
+    <script>
+      //02_kidbanchan.json
+      const URL =
+        "https://dino-21.github.io/zipbanchan/json/02_kidbanchan.json";
+
+      fetch(URL)
+        .then((res) => res.json())
+        .then((data) => {
+          // 어린이 반찬 박스 찾기
+          const box = document.querySelector(".kid-banchan");
+
+          // 혹시 남아 있을지 모를 기존 카드 제거
+          const oldCards = box.querySelectorAll("a");
+          oldCards.forEach((a) => a.remove());
+
+          // JSON 데이터로 카드 생성
+          data.forEach((item) => {
+            const a = document.createElement("a");
+            a.href = "#";
+
+            const card = document.createElement("div");
+            card.className = "product-card";
+
+            const img = document.createElement("img");
+            img.src = item.main_img;
+            img.alt = item.name;
+
+            const h4 = document.createElement("h4");
+            h4.textContent = item.name;
+
+            const p = document.createElement("p");
+            p.textContent = item.description;
+
+            const h5 = document.createElement("h5");
+            h5.textContent = item.price + "원";
+
+            // 조립
+            card.appendChild(img);
+            card.appendChild(h4);
+            card.appendChild(p);
+            card.appendChild(h5);
+
+            a.appendChild(card);
+            box.appendChild(a);
+          });
+        })
+        .catch((err) => console.error("JSON 로딩 오류:", err));
+    </script>
+
+    <!-- 새로 나온 반찬 -->
+    <script>
+      //03_newbanchan.json
+      async function loadNewBanchan() {
+        const res = await fetch(
+          "https://dino-21.github.io/zipbanchan/json/03_newbanchan.json",
+        );
+        const data = await res.json();
+
+        const box = document.querySelector(".new-banchan");
+
+        data.forEach((item) => {
+          const a = document.createElement("a");
+          a.href = "#";
+
+          const card = document.createElement("div");
+          card.className = "product-card";
+
+          card.innerHTML = `
+          <img src="${item.main_img}" alt="${item.name}">
+          <h4>${item.name}</h4>
+          <p>${item.description}</p>
+          <h5>${item.price}원</h5>
+        `;
+
+          a.appendChild(card);
+          box.appendChild(a);
+        });
+      }
+
+      loadNewBanchan();
+    </script>
+
+    <!-- MD 추천반찬 -->
+    <script>
+      //04_mdbanchan.json + multi tap
+      function createMdCard(item) {
+        const a = document.createElement("a");
+        a.href = "#";
+
+        const card = document.createElement("div");
+        card.className = "md-card";
+
+        card.innerHTML = `
+        <img src="${item.main_img}" alt="${item.name}">
+        <h4>${item.name}</h4>
+        <p>${item.description}</p>
+        <h5>${item.price}원</h5>
+      `;
+
+        a.appendChild(card);
+        return a;
+      }
+
+      function renderCategory(data, category, section) {
+        section
+          .querySelectorAll(".md-card")
+          .forEach((el) => el.parentElement.remove());
+
+        data
+          .filter((item) => item.category === category)
+          .forEach((item) => section.appendChild(createMdCard(item)));
+      }
+
+      function setActive(liList, activeLi) {
+        liList.forEach((li) => li.classList.remove("active"));
+        activeLi.classList.add("active");
+      }
+
+      // ============================
+      //      JSON 로딩
+      // ============================
+      fetch("https://dino-21.github.io/zipbanchan/json/04_mdbanchan.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const mdSection = document.querySelector(".md-banchan");
+          const liList = mdSection.querySelectorAll("ul li");
+
+          const categories = [
+            "bibim",
+            "soup",
+            "kid",
+            "bokkeum",
+            "muchim",
+            "main",
+            "jorim",
+          ];
+
+          // ★ 초기 화면: 비빔밥
+          setActive(liList, liList[0]);
+          renderCategory(data, "bibim", mdSection);
+
+          liList.forEach((li, index) => {
+            const aTag = li.querySelector("a");
+
+            aTag.addEventListener("mouseover", (e) => {
+              e.preventDefault(); // a 태그 이동 막기
+
+              // 활성화 스타일
+              setActive(liList, li);
+
+              // 카드 다시 렌더링
+              renderCategory(data, categories[index], mdSection);
+            });
+          });
+        });
+    </script>
+  </body>
+</html>

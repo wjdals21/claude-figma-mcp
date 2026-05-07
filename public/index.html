@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>집반찬연구소</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── LAYOUT ── */
+    .page { width: 1200px; margin: 0 auto; }
+
+    /* ── HEADER ── */
+    header {
+      width: 1200px;
+      height: 150px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+    .util-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      padding-top: 39px;
+    }
+    .util-bar a { font-size: 12px; color: #5B5B5B; }
+    .util-bar span { font-size: 12px; color: #5B5B5B; }
+    .main-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+    }
+    .search-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .search-bar {
+      width: 335px;
+      height: 46px;
+      border: 1px solid #FF6B00;
+      border-radius: 10px;
+      background: #FF6B00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .search-bar img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    .logo-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo-wrapper img { height: 46px; object-fit: contain; }
+    nav { display: flex; align-items: center; gap: 24px; }
+    .nav-item { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+    .nav-item img { width: 28px; height: 28px; object-fit: cover; }
+    .nav-item span { font-size: 15px; color: #5B5B5B; }
+
+    /* ── MAIN BANNER ── */
+    .banner {
+      width: 1200px;
+      height: 450px;
+      overflow: hidden;
+      background: #D9D9D9;
+      margin: 0 auto;
+    }
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ── SECTION COMMON ── */
+    .section {
+      width: 1165px;
+      margin: 60px auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-header h2 {
+      font-size: 27px;
+      font-weight: 400;
+      color: #000;
+      margin-bottom: 8px;
+    }
+    .section-header p {
+      font-size: 17px;
+      font-weight: 400;
+      color: #636363;
+    }
+
+    /* ── PRODUCT GRID ── */
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .product-card {
+      width: 280px;
+      background: #fff;
+      cursor: pointer;
+    }
+    .product-img {
+      width: 280px;
+      height: 290px;
+      background: #D9D9D9;
+      overflow: hidden;
+    }
+    .product-img.tall { height: 380px; }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; }
+    .product-info { padding: 10px 10px 0; }
+    .product-name {
+      font-size: 20px;
+      font-weight: 500;
+      color: #000;
+      margin-bottom: 4px;
+    }
+    .product-desc {
+      font-size: 13px;
+      font-weight: 400;
+      color: #838383;
+      margin-bottom: 4px;
+    }
+    .product-price {
+      font-size: 15px;
+      font-weight: 500;
+      color: #000;
+    }
+
+    /* ── BANNER 3 ── */
+    .banner3-wrap {
+      width: 1165px;
+      margin: 60px auto;
+      display: flex;
+      gap: 15px;
+    }
+    .banner3-item {
+      flex: 1;
+      height: 130px;
+      background: #D9D9D9;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .banner3-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── CATEGORY TABS ── */
+    .tab-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .tab {
+      height: 50px;
+      padding: 0 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: 17px;
+      font-family: 'Inter', sans-serif;
+      background: #A1A1A1;
+      color: #fff;
+      min-width: 100px;
+      transition: background 0.2s;
+    }
+    .tab.active { background: #0D5611; }
+
+    /* ── FOOTER ── */
+    footer {
+      width: 1200px;
+      height: 200px;
+      background: #fff;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-top: 1px solid #eee;
+    }
+    .footer-cs { width: 260px; }
+    .footer-cs .cs-title { font-size: 14px; font-weight: 600; color: #000; margin-bottom: 6px; }
+    .footer-cs .cs-phone { font-size: 18px; font-weight: 600; color: #000; margin-bottom: 4px; }
+    .footer-cs .cs-email { font-size: 12px; color: #333; margin-bottom: 4px; }
+    .footer-cs .cs-hours { font-size: 12px; color: #333; line-height: 1.6; }
+    .footer-info { flex: 1; padding: 0 40px; }
+    .footer-info .company-name { font-size: 14px; font-weight: 600; color: #000; margin-bottom: 6px; }
+    .footer-info .company-detail { font-size: 12px; color: #333; line-height: 1.7; }
+    .footer-links { display: flex; gap: 12px; margin-top: 8px; }
+    .footer-links a { font-size: 12px; color: #333; text-decoration: underline; }
+    .footer-copy { font-size: 12px; color: #333; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="util-bar">
+    <a href="#">로그인</a><span>|</span>
+    <a href="#">회원가입</a><span>|</span>
+    <a href="#">고객센터</a>
+  </div>
+  <div class="main-row page">
+    <div class="search-wrap">
+      <div class="search-bar">
+        <img src="images/search_icon.png" alt="검색" />
+      </div>
+    </div>
+    <div class="logo-wrapper">
+      <img src="images/logo.png" alt="집반찬연구소" />
+    </div>
+    <nav>
+      <a href="#" class="nav-item">
+        <img src="images/icon1.png" alt="브랜드" />
+        <span>브랜드</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="images/icon2.png" alt="반찬보기" />
+        <span>반찬보기</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="images/icon3.png" alt="장바구니" />
+        <span>장바구니</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="images/icon4.png" alt="내정보" />
+        <span>내정보</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── MAIN BANNER ── -->
+<div class="banner">
+  <img src="images/banner-main.png" alt="메인 배너" />
+</div>
+
+<!-- ── 1. 부담없는 알뜰 반찬 ── -->
+<section class="section">
+  <div class="section-header">
+    <h2>부담없는 알뜰 반찬</h2>
+    <p>착한 가격으로 챙기는 든든 한 끼</p>
+  </div>
+  <div class="product-grid">
+    <div class="product-card"><div class="product-img"><img src="images/01_banchan/banchan1.jpg" alt="반찬1" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/01_banchan/banchan2.jpg" alt="반찬2" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/01_banchan/banchan3.jpg" alt="반찬3" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/01_banchan/banchan4.jpg" alt="반찬4" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/01_banchan/banchan5.jpg" alt="반찬5" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/01_banchan/banchan6.jpg" alt="반찬6" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/01_banchan/banchan7.jpg" alt="반찬7" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/01_banchan/banchan8.jpg" alt="반찬8" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+  </div>
+</section>
+
+<!-- ── 2. 어린이 반찬 ── -->
+<section class="section">
+  <div class="section-header">
+    <h2>어린이 반찬</h2>
+    <p>착한 가격으로 챙기는 든든 한 끼</p>
+  </div>
+  <div class="product-grid">
+    <div class="product-card"><div class="product-img"><img src="images/02_kid_banchan/kid_banchan1.jpg" alt="어린이반찬1" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/02_kid_banchan/kid_banchan2.jpg" alt="어린이반찬2" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/02_kid_banchan/kid_banchan3.jpg" alt="어린이반찬3" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/02_kid_banchan/kid_banchan4.jpg" alt="어린이반찬4" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+  </div>
+</section>
+
+<!-- ── 3. 새로 나온 반찬 ── -->
+<section class="section">
+  <div class="section-header">
+    <h2>새로 나온 반찬</h2>
+    <p>착한 가격으로 챙기는 든든 한 끼</p>
+  </div>
+  <div class="product-grid">
+    <div class="product-card"><div class="product-img"><img src="images/03_new_banchan/new_banchan1.jpg" alt="새반찬1" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/03_new_banchan/new_banchan2.jpg" alt="새반찬2" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/03_new_banchan/new_banchan3.jpg" alt="새반찬3" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/03_new_banchan/new_banchan4.jpg" alt="새반찬4" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/03_new_banchan/new_banchan5.jpg" alt="새반찬5" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/03_new_banchan/new_banchan6.jpg" alt="새반찬6" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/03_new_banchan/new_banchan7.jpg" alt="새반찬7" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+    <div class="product-card"><div class="product-img"><img src="images/03_new_banchan/new_banchan8.jpg" alt="새반찬8" /></div><div class="product-info"><div class="product-name">미나리무침</div><div class="product-desc">향긋하고 고소한 봄나물</div><div class="product-price">3,900원</div></div></div>
+  </div>
+</section>
+
+<!-- ── 4. 배너 3개 ── -->
+<div class="banner3-wrap">
+  <div class="banner3-item"><img src="images/banner/banner1.png" alt="배너1" /></div>
+  <div class="banner3-item"><img src="images/banner/banner2.png" alt="배너2" /></div>
+  <div class="banner3-item"><img src="images/banner/banner3.png" alt="배너3" /></div>
+</div>
+
+<!-- ── 5. MD 추천반찬 ── -->
+<section class="section">
+  <div class="section-header">
+    <h2>MD 추천반찬</h2>
+    <p>이번 주 가장 추천하는 제품만 골라드려요</p>
+  </div>
+  <div class="tab-wrap">
+    <button class="tab active" data-category="bibim">비빔밥</button>
+    <button class="tab" data-category="soup">국 / 찌개 / 탕</button>
+    <button class="tab" data-category="kid">어린이 반찬</button>
+    <button class="tab" data-category="bokkeum">볶음</button>
+    <button class="tab" data-category="muchim">무침</button>
+    <button class="tab" data-category="main">메인요리</button>
+    <button class="tab" data-category="jorim">조림</button>
+  </div>
+  <div class="product-grid" id="md-grid" style="justify-content:center"></div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-cs">
+    <div class="cs-title">고객센터</div>
+    <div class="cs-phone">1588-3754</div>
+    <div class="cs-email">zipbanchan@sannamchon.co.kr</div>
+    <div class="cs-hours">
+      평일 08:30~17:30 / 토요일 08:30~12:00<br />
+      점심시간 12:00~13:00<br />
+      일요일, 공휴일은 휴무입니다.
+    </div>
+  </div>
+  <div class="footer-info">
+    <div class="company-name">집반찬연구소</div>
+    <div class="company-detail">
+      인천광역시 서구 가석로 26(가좌동) 집반찬연구소 대표자: 박종철<br />
+      사업자등록번호: 121-86-17743 &nbsp;통신판매업 신고번호: 제 2023-인천서구-3834 호<br />
+      개인정보보호책임자: 정문채 &nbsp;제품 문의: zipbanchan@sannamchon.co.kr
+    </div>
+    <div class="footer-links">
+      <a href="#">집반찬연구소 소개</a>
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+    </div>
+    <div class="footer-copy">Copyright © SANNAMCHON CORP. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+  const MD_CATEGORIES = {
+    bibim:   { prefix: 'images/04_md_banchan/bibim/bibim_', count: 4 },
+    soup:    { prefix: 'images/04_md_banchan/soup/soup_',   count: 4 },
+    kid:     { prefix: 'images/04_md_banchan/kid/kid_',     count: 4 },
+    bokkeum: { prefix: 'images/04_md_banchan/bokkeum/bokkeum_', count: 4 },
+    muchim:  { prefix: 'images/04_md_banchan/muchim/muchim_', count: 4 },
+    main:    { prefix: 'images/04_md_banchan/main/main_',   count: 4 },
+    jorim:   { prefix: 'images/04_md_banchan/jorim/jorim_', count: 4 },
+  };
+
+  function renderMdGrid(category) {
+    const { prefix, count } = MD_CATEGORIES[category];
+    const grid = document.getElementById('md-grid');
+    grid.innerHTML = Array.from({ length: count }, (_, i) => `
+      <div class="product-card">
+        <div class="product-img tall">
+          <img src="${prefix}${i + 1}.jpg" alt="${category} ${i + 1}" />
+        </div>
+        <div class="product-info">
+          <div class="product-name">추천반찬</div>
+          <div class="product-desc">이번 주 MD 추천 메뉴</div>
+          <div class="product-price">9,900원</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderMdGrid(tab.dataset.category);
+    });
+  });
+
+  renderMdGrid('bibim');
+</script>
+
+</body>
+</html>

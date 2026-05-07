@@ -1,0 +1,26 @@
+@charset "uff-8";
+
+/*브라우저 기본 스타일 초기화*/
+ /* ========== Reset ========== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ul,
+    ol,
+    li {
+      list-style: none;
+    }
+
+    body {
+      font-family: "맑은 고딕";
+      color: #000;
+    }
+
+    a {
+      text-decoration: none;
+    }

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>집반찬</title>
+  <style>
+    /* ========== Reset ========== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ul,
+    ol,
+    li {
+      list-style: none;
+    }
+
+    body {
+      font-family: "맑은 고딕";
+      color: #000;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* ========== Layout 공통 컨테이너 ========== */
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: space-between;
+    }
+
+    /* ========== Header ========== */
+    header {
+      min-height: 150px;
+      /* 데모용 고정 높이 */
+      align-items: center;
+
+    }
+
+
+    /* ========== Main ========== */
+    main {
+      min-height: 600px;
+      /* 나중에 콘텐츠 늘어남 */
+    }
+
+    .section-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: center;
+      gap: 15px;
+      margin: 30px 0px;
+    }
+
+    .banchan {
+      width: 100%;
+      min-height: 1000px;
+    }
+
+    div>h3 {
+      width: 100%;
+      font-size: 27px;
+      text-align: center;
+      line-height: 30px;
+    }
+
+    div>p {
+      width: 100%;
+      font-size: 17px;
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .product-card {
+      width: 280px;
+      height: 395px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+    }
+
+    .product-card>img,
+    .md-card>img {
+      width: 100%;
+      margin: 0 0 15px 0;
+    }
+
+    .product-card>h4,
+    .md-card>h4 {
+      font-size: 17px;
+      color: #000
+    }
+
+    .product-card>p,
+    .md-card>p {
+      font-size: 14px;
+      color: #666;
+      text-align: left;
+    }
+
+    .product-card>h5,
+    .md-card>h5 {
+      font-size: 17px;
+      color: #000;
+    }
+
+    .md-card {
+      width: 280px;
+      height: 515px;
+    }
+
+
+
+  </style>
+
+
+</head>
+
+<body>
+
+
+ <!--자바스크립트 통해서 데이터 불러와서, 데이터 없어도 보여줄 수 있음--> 
+  <main class="container">
+    <div class="banchan section-grid">
+      <h3>부담없는 알뜰 반찬</h3>
+      <p>착한 가격으로 챙기는 든든 한 끼</p>
+
+      <!-- 여기 안에 JS로 카드들이 채워짐 -->
+      <!-- <a href="#">
+        <div class="product-card">
+          <img src="img/01_banchan/banchan1.jpg" alt="">
+          <h4>무나물</h4>
+          <p>푹 익혀서 먹기 편해요</p>
+          <h5>2800원</h5>
+        </div>
+      </a> -->
+
+  
+
+
+    </div>
+
+  </main>
+
+  <script>
+    /* json 파일을 불러와서, 반찬이라는 클래스를 불러옴. */
+    
+    fetch("https://dino-21.github.io/zipbanchan/json/01_banchan.json")
+      .then(res => res.json())
+      .then(data => {
+        const box = document.querySelector(".banchan");
+
+        data.forEach(item => {
+          box.innerHTML += `
+            <a href="#">
+              <div class="product-card">
+                <img src="${item.main_img}" alt="${item.name}">
+                <h4>${item.name}</h4>
+                <p>${item.description}</p>
+                <h5>${item.price}원</h5>
+              </div>
+            </a>
+          `;
+        });
+      });
+  </script>
+
+</body>
+
+</html>

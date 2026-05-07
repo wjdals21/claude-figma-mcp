@@ -1,0 +1,4 @@
+# Figma 토큰이 포함된 MCP 설정 (git에 올리지 않도록 주의)
+.mcp.json
+.DS_Store
+build/
