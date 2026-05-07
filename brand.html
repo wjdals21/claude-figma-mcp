@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>브랜드 소개 — 집반찬연구소</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===== Reset ===== */
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      ul, ol, li { list-style: none; }
+      a { text-decoration: none; }
+
+      /* ===== Variables ===== */
+      :root {
+        --forest:      #2c5f2e;
+        --sage:        #4a7c59;
+        --sage-light:  #b7d5c3;
+        --mint:        #e6f4ec;
+        --cream:       #f7f3ed;
+        --cream-deep:  #ede8df;
+        --amber:       #b8832a;
+        --amber-bg:    #fdf5e4;
+        --dark:        #1c1c1c;
+        --mid:         #555;
+        --light:       #999;
+        --border:      #e0d9cf;
+        --white:       #fff;
+        --shadow-sm:   0 2px 12px rgba(0,0,0,.06);
+        --shadow-md:   0 10px 36px rgba(0,0,0,.10);
+        --radius:      14px;
+        --trans:       .24s ease;
+      }
+
+      body {
+        font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+        color: var(--dark);
+        background: var(--white);
+        line-height: 1.75;
+      }
+
+      /* ===== Container ===== */
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+
+      /* ===========================
+         HEADER (index와 동일 구조)
+      =========================== */
+      header {
+        width: 100%;
+        background: var(--white);
+        border-bottom: 1px solid #e8e8e8;
+        box-shadow: 0 2px 8px rgba(0,0,0,.06);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      header .container {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 24px;
+      }
+
+      .search-box {
+        display: flex;
+        align-items: center;
+        width: 280px;
+        height: 44px;
+        background: #fafaf8;
+        border: 1.5px solid #e8e8e8;
+        border-radius: 22px;
+        padding: 0 6px 0 16px;
+        transition: border-color var(--trans), box-shadow var(--trans);
+      }
+
+      .search-box:focus-within {
+        border-color: var(--forest);
+        box-shadow: 0 0 0 3px rgba(44,95,46,.12);
+      }
+
+      .search-box input {
+        border: none;
+        outline: none;
+        background: transparent;
+        flex: 1;
+        font-family: inherit;
+        font-size: 14px;
+        color: var(--dark);
+      }
+
+      .search-box input::placeholder { color: #bbb; }
+
+      .search-box button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: 0 10px 0 6px;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-box button img {
+        width: 22px;
+        height: 22px;
+        opacity: .45;
+        transition: opacity var(--trans);
+      }
+
+      .search-box button:hover img { opacity: .9; }
+
+      .logo img { height: 44px; display: block; }
+
+      .right-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+      }
+
+      .login ul { display: flex; gap: 16px; }
+
+      .login ul li a {
+        font-size: 12px;
+        color: #888;
+        transition: color var(--trans);
+      }
+
+      .login ul li a:hover { color: var(--forest); }
+
+      .menu ul { display: flex; gap: 4px; }
+
+      .menu ul li { position: relative; }
+
+      .menu ul li > a {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--dark);
+        transition: background var(--trans), color var(--trans);
+      }
+
+      .menu ul li > a:hover,
+      .menu ul li > a.active {
+        background: var(--mint);
+        color: var(--forest);
+      }
+
+      .menu img { width: 20px; height: 20px; }
+
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        background: var(--white);
+        border: 1px solid #e8e8e8;
+        border-radius: 10px;
+        box-shadow: 0 6px 24px rgba(0,0,0,.10);
+        min-width: 148px;
+        z-index: 300;
+        overflow: hidden;
+      }
+
+      .dropdown li { border-bottom: 1px solid #f0f0f0; }
+      .dropdown li:last-child { border-bottom: none; }
+
+      .dropdown li a {
+        display: block;
+        padding: 11px 18px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--dark);
+        white-space: nowrap;
+        transition: background var(--trans), color var(--trans);
+      }
+
+      .dropdown li a:hover {
+        background: var(--mint);
+        color: var(--forest);
+      }
+
+      .menu ul li:hover .dropdown { display: block; }
+
+      /* ===========================
+         HERO
+      =========================== */
+      .hero {
+        background: var(--cream);
+        background-image:
+          radial-gradient(ellipse 60% 50% at 8% 15%,  rgba(44,95,46,.08)  0%, transparent 70%),
+          radial-gradient(ellipse 50% 40% at 92% 85%, rgba(184,131,42,.08) 0%, transparent 70%);
+        padding: 110px 28px 96px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* 배경 장식 원 */
+      .hero::before {
+        content: '';
+        position: absolute;
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        border: 1px solid rgba(44,95,46,.12);
+        top: -160px;
+        left: -160px;
+        pointer-events: none;
+      }
+
+      .hero::after {
+        content: '';
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        border: 1px solid rgba(184,131,42,.14);
+        bottom: -100px;
+        right: -80px;
+        pointer-events: none;
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--forest);
+        background: var(--mint);
+        border: 1px solid rgba(44,95,46,.18);
+        padding: 7px 18px;
+        border-radius: 30px;
+        margin-bottom: 36px;
+      }
+
+      .hero-badge svg { flex-shrink: 0; }
+
+      .hero h1 {
+        font-family: 'Noto Serif KR', serif;
+        font-size: 50px;
+        font-weight: 700;
+        line-height: 1.38;
+        letter-spacing: -1.5px;
+        color: var(--dark);
+        margin-bottom: 30px;
+      }
+
+      .hero-desc {
+        font-size: 16.5px;
+        font-weight: 400;
+        color: var(--mid);
+        line-height: 1.9;
+        margin-bottom: 44px;
+        word-break: keep-all;
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--forest);
+        padding-bottom: 3px;
+        border-bottom: 1.5px solid var(--forest);
+        transition: gap var(--trans), opacity var(--trans);
+      }
+
+      .hero-cta:hover { gap: 14px; opacity: .7; }
+
+      .hero-divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--border), transparent);
+        margin: 0;
+      }
+
+      /* ===========================
+         공통 섹션 레이아웃
+      =========================== */
+      section { padding: 100px 0; }
+
+      .sec-label {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--sage);
+        margin-bottom: 12px;
+      }
+
+      .sec-title {
+        font-family: 'Noto Serif KR', serif;
+        font-size: 34px;
+        font-weight: 700;
+        letter-spacing: -0.8px;
+        color: var(--dark);
+        margin-bottom: 52px;
+        line-height: 1.3;
+      }
+
+      /* ===========================
+         BRAND VALUES
+      =========================== */
+      .values { background: var(--white); }
+
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      .value-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 38px 30px 34px;
+        position: relative;
+        overflow: hidden;
+        transition: transform var(--trans), box-shadow var(--trans);
+      }
+
+      .value-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 4px;
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+
+      .value-card.c-green::before { background: var(--forest); }
+      .value-card.c-amber::before { background: var(--amber); }
+      .value-card.c-sage::before  { background: var(--sage); }
+
+      .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .value-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        flex-shrink: 0;
+      }
+
+      .value-card.c-green .value-icon { background: var(--mint);       color: var(--forest); }
+      .value-card.c-amber .value-icon { background: var(--amber-bg);   color: var(--amber);  }
+      .value-card.c-sage  .value-icon { background: #e9f4ef;           color: var(--sage);   }
+
+      .value-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 12px;
+        letter-spacing: -0.3px;
+      }
+
+      .value-card p {
+        font-size: 14px;
+        color: var(--mid);
+        line-height: 1.85;
+        word-break: keep-all;
+      }
+
+      /* ===========================
+         STATS
+      =========================== */
+      .stats {
+        background: var(--forest);
+        position: relative;
+        overflow: hidden;
+        padding: 80px 0;
+      }
+
+      /* 배경 장식 */
+      .stats::before {
+        content: '';
+        position: absolute;
+        width: 700px;
+        height: 700px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,.06);
+        top: -300px;
+        right: -200px;
+        pointer-events: none;
+      }
+
+      .stats::after {
+        content: '';
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,.05);
+        bottom: -180px;
+        left: -100px;
+        pointer-events: none;
+      }
+
+      .stats .container { position: relative; z-index: 1; }
+
+      .stats .sec-label { color: var(--sage-light); margin-bottom: 8px; }
+
+      .stats .sec-title {
+        color: var(--white);
+        margin-bottom: 44px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background: rgba(255,255,255,.06);
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.10);
+      }
+
+      .stat-item {
+        padding: 44px 36px;
+        text-align: center;
+        border-right: 1px solid rgba(255,255,255,.10);
+        position: relative;
+      }
+
+      .stat-item:last-child { border-right: none; }
+
+      .stat-number {
+        font-family: 'Noto Serif KR', serif;
+        font-size: 54px;
+        font-weight: 700;
+        color: var(--sage-light);
+        letter-spacing: -2px;
+        line-height: 1;
+        margin-bottom: 14px;
+      }
+
+      .stat-desc {
+        font-size: 14px;
+        color: rgba(255,255,255,.65);
+        line-height: 1.7;
+        word-break: keep-all;
+      }
+
+      .stat-source {
+        text-align: right;
+        font-size: 11.5px;
+        color: rgba(255,255,255,.35);
+        margin-top: 28px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,.10);
+      }
+
+      /* ===========================
+         INGREDIENTS
+      =========================== */
+      .ingredients { background: var(--cream); }
+
+      .ingredients-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+
+      .ingr-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 30px 30px 28px;
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+        transition: transform var(--trans), box-shadow var(--trans);
+      }
+
+      .ingr-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .ingr-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--forest);
+        flex-shrink: 0;
+        margin-top: 7px;
+      }
+
+      .ingr-card h4 {
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 8px;
+        letter-spacing: -0.2px;
+      }
+
+      .ingr-card p {
+        font-size: 14px;
+        color: var(--mid);
+        line-height: 1.8;
+        word-break: keep-all;
+      }
+
+      /* ===========================
+         FOOTER
+      =========================== */
+      footer {
+        background: #1c1c1c;
+        padding: 52px 0;
+      }
+
+      footer .container {
+        display: flex;
+        gap: 52px;
+        align-items: flex-start;
+      }
+
+      footer h4 {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 14px;
+        letter-spacing: 0.5px;
+      }
+
+      .footer-left { flex: 1; }
+      .footer-right { flex: 2; }
+
+      footer p {
+        margin: 4px 0;
+        line-height: 1.75;
+        font-size: 12px;
+        color: #888;
+      }
+
+      .footer-left .tel {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--white);
+        margin: 6px 0 10px;
+        letter-spacing: -0.5px;
+      }
+
+      .footer-right .links { margin-top: 10px; }
+
+      .footer-right .links a {
+        margin: 0 6px;
+        font-size: 12px;
+        color: #aaa;
+        transition: color var(--trans);
+      }
+
+      .footer-right .links a:first-child { margin-left: 0; }
+      .footer-right .links a:hover { color: var(--white); }
+
+      .footer-right .copy {
+        margin-top: 18px;
+        font-size: 11px;
+        color: #4a4a4a;
+      }
+
+      /* ===========================
+         SCROLL FADE-IN
+      =========================== */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity .55s ease, transform .55s ease;
+      }
+
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header>
+      <div class="container">
+        <div class="search-box">
+          <input id="searchInput" type="text" placeholder="반찬을 입력해주세요" />
+          <button id="searchBtn" type="button">
+            <img src="img/search_icon.png" alt="검색" />
+          </button>
+        </div>
+
+        <div class="logo"><img src="img/logo.png" alt="집반찬연구소" /></div>
+
+        <div class="right-box">
+          <div class="login">
+            <ul>
+              <li><a href="#">로그인</a></li>
+              <li><a href="#">회원가입</a></li>
+              <li><a href="#">고객센터</a></li>
+            </ul>
+          </div>
+          <nav class="menu">
+            <ul>
+              <li>
+                <a href="brand.html" class="active">
+                  <img src="img/icon1.png" alt="" />브랜드
+                </a>
+              </li>
+              <li>
+                <a href="#"><img src="img/icon2.png" alt="" />반찬보기</a>
+                <ul class="dropdown">
+                  <li><a href="01_banchan.html">알뜰반찬</a></li>
+                  <li><a href="02_kidbanchan.html">어린이 반찬</a></li>
+                  <li><a href="03_newbanchan.html">새로운 반찬</a></li>
+                </ul>
+              </li>
+              <li><a href="#"><img src="img/icon3.png" alt="" />장바구니</a></li>
+              <li><a href="#"><img src="img/icon4.png" alt="" />내정보</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">
+          <!-- leaf icon -->
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8C8 10 5.9 16.17 3.82 19.06c-.6.83.47 1.85 1.2 1.12C7.18 18.03 10 18 13 18c6 0 9-3 9-9 0-3.5-2-4.5-5-1z"/>
+            <path d="M3 21l5-5"/>
+          </svg>
+          집반찬연구소 &nbsp;·&nbsp; Brand Story
+        </span>
+
+        <h1>
+          자연이 준 재료 그대로,<br />
+          건강한 한 끼를<br />연구합니다
+        </h1>
+
+        <p class="hero-desc">
+          작은 차이가 프리미엄을 만듭니다. 집반찬연구소는 어떤 재료로<br />
+          만들었는지부터 시작합니다. 씹을수록 깊어지는 맛,<br />
+          몸이 먼저 알아보는 음식을 지향합니다.
+        </p>
+
+        <a href="#ingredients" class="hero-cta">
+          어떤 재료로 만들었는지 확인하세요
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <div class="hero-divider"></div>
+
+    <!-- ===== BRAND VALUES ===== -->
+    <section class="values">
+      <div class="container">
+        <span class="sec-label fade-up">브랜드 가치</span>
+        <h2 class="sec-title fade-up">우리가 추구하는 세 가지</h2>
+
+        <div class="values-grid">
+          <!-- 건강 -->
+          <div class="value-card c-green fade-up">
+            <div class="value-icon">
+              <!-- ECG / health monitor -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 17v4M16 17v4M4 21h16"/>
+                <polyline points="6,10 8.5,6.5 10.5,13 13,9 15,11 17,9"/>
+              </svg>
+            </div>
+            <h3>건강</h3>
+            <p>자극적인 간 없이 깊은 맛. 나트륨을 줄이고 재료 본연의 감칠맛을 살립니다.</p>
+          </div>
+
+          <!-- 시니어 식단 -->
+          <div class="value-card c-amber fade-up">
+            <div class="value-icon">
+              <!-- two people + heart -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3>시니어 식단</h3>
+            <p>혈압·혈당·소화를 고려한 맞춤 영양 설계. 어르신의 한 끼를 연구합니다.</p>
+          </div>
+
+          <!-- 자연주의 -->
+          <div class="value-card c-sage fade-up">
+            <div class="value-icon">
+              <!-- leaf -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 8C8 10 5.9 16.17 3.82 19.06c-.6.83.47 1.85 1.2 1.12C7.18 18.03 10 18 13 18c6 0 9-3 9-9 0-3.5-2-4.5-5-1z"/>
+                <path d="M3 21l5-5"/>
+              </svg>
+            </div>
+            <h3>자연주의</h3>
+            <p>국내산 재료, 첨가물 최소화. 집에서 만든 것처럼 정직한 재료를 씁니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats">
+      <div class="container">
+        <span class="sec-label fade-up">왜 지금 시니어 건강식인가</span>
+        <h2 class="sec-title fade-up">숫자로 보는 변화</h2>
+
+        <div class="stats-grid fade-up">
+          <div class="stat-item">
+            <div class="stat-number">20%</div>
+            <p class="stat-desc">65세 이상 인구<br />초고령사회 진입</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">3조 원</div>
+            <p class="stat-desc">국내 시니어<br />케어푸드 시장 규모</p>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">19.2%</div>
+            <p class="stat-desc">고령 인구 비율<br />(통계청 2025)</p>
+          </div>
+        </div>
+
+        <p class="stat-source fade-up">
+          출처: 식품음료신문, 한국건강기능식품협회, 통계청 2025
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== INGREDIENTS ===== -->
+    <section class="ingredients" id="ingredients">
+      <div class="container">
+        <span class="sec-label fade-up">자연재료 원칙</span>
+        <h2 class="sec-title fade-up">우리가 고르는 재료</h2>
+
+        <div class="ingredients-grid">
+          <div class="ingr-card fade-up">
+            <span class="ingr-dot"></span>
+            <div>
+              <h4>한우 사용</h4>
+              <p>한우쇠고기무국, 소불고기 등 국내산 한우를 직접 사용합니다.</p>
+            </div>
+          </div>
+
+          <div class="ingr-card fade-up">
+            <span class="ingr-dot"></span>
+            <div>
+              <h4>국내산 나물 3종</h4>
+              <p>도라지·고사리·숙주 등 국내산 나물로 자연 그대로의 맛을 냅니다.</p>
+            </div>
+          </div>
+
+          <div class="ingr-card fade-up">
+            <span class="ingr-dot"></span>
+            <div>
+              <h4>첨가물 최소화</h4>
+              <p>자극적인 조미료 대신 재료 본연의 맛을 살리는 조리법을 씁니다.</p>
+            </div>
+          </div>
+
+          <div class="ingr-card fade-up">
+            <span class="ingr-dot"></span>
+            <div>
+              <h4>저나트륨 레시피</h4>
+              <p>칼륨 풍부한 채소·나물 중심으로 시니어 혈압 관리를 돕습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <div class="container">
+        <div class="footer-left">
+          <h4>고객센터</h4>
+          <p class="tel">1588-3754</p>
+          <p>zipbanchan@sannamchon.co.kr</p>
+          <p style="margin-top:8px;">
+            평일 08:30~17:30 / 토요일 08:30~12:00<br />
+            점심시간 12:00~13:00<br />
+            일요일, 공휴일은 휴무입니다.
+          </p>
+        </div>
+
+        <div class="footer-right">
+          <h4>집반찬연구소</h4>
+          <p>
+            인천광역시 서구 가석로 26(가좌동) 집반찬연구소 대표자: 박종철<br />
+            사업자등록번호: 121-86-17743 통신판매업 신고번호: 제 2023-인천서구-3834 호<br />
+            개인정보보호책임자: 정문채 &nbsp;|&nbsp; 제품 문의: zipbanchan@sannamchon.co.kr
+          </p>
+          <p class="links">
+            <a href="#">집반찬연구소 소개</a> |
+            <a href="#">이용약관</a> |
+            <a href="#">개인정보처리방침</a>
+          </p>
+          <p class="copy">Copyright © SANNAMCHON CORP. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* 검색 */
+      document.getElementById('searchBtn').addEventListener('click', () => {
+        const q = document.getElementById('searchInput').value.trim();
+        if (q) location.href = 'search.html?q=' + encodeURIComponent(q);
+      });
+      document.getElementById('searchInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const q = e.target.value.trim();
+          if (q) location.href = 'search.html?q=' + encodeURIComponent(q);
+        }
+      });
+
+      /* 앵커 부드러운 스크롤 */
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const id = a.getAttribute('href').slice(1);
+          const el = document.getElementById(id);
+          if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+
+      /* 스크롤 페이드인 */
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 80);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

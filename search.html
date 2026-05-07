@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>검색결과 - 집반찬</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      ul, ol, li { list-style: none; }
+
+      body {
+        font-family: "맑은 고딕";
+        color: #000;
+      }
+
+      a { text-decoration: none; }
+
+      .container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: space-between;
+      }
+
+      /* ===== Header ===== */
+      header {
+        min-height: 150px;
+        align-items: center;
+      }
+
+      .search-box {
+        width: 350px;
+        height: 60px;
+        background: #fff;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .search-box > input {
+        border: none;
+        outline: none;
+        padding: 8px;
+        width: 280px;
+        font-size: 15px;
+      }
+
+      .search-box > button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        margin: 10px 10px 0;
+        padding: 0;
+      }
+
+      .search-box > button > img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .right-box {
+        width: 400px;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .logo {
+        width: 350px;
+        height: 70px;
+        font-size: 28px;
+        text-align: center;
+      }
+
+      .login {
+        width: 100%;
+        height: 30px;
+        font-size: 14px;
+      }
+
+      .login > ul {
+        margin-bottom: 6px;
+        display: flex;
+        justify-content: flex-end;
+        font-size: 12px;
+        gap: 15px;
+      }
+
+      .login > ul > li > a { color: #666; }
+
+      .menu {
+        width: 100%;
+        height: 40px;
+        margin: 35px 0 0 0;
+      }
+
+      .menu > ul {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 15px;
+        color: #000;
+        gap: 15px;
+      }
+
+      .menu > ul > li > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #000;
+        gap: 5px;
+        font-weight: bold;
+      }
+
+      .menu img {
+        width: 25px;
+        height: 25px;
+      }
+
+      /* ===== Search Result Area ===== */
+      main {
+        padding: 40px 0 60px;
+      }
+
+      .search-header {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .search-header h2 {
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+
+      .search-header h2 span {
+        color: #0d5611;
+      }
+
+      .search-header p {
+        font-size: 14px;
+        color: #888;
+        text-align: left;
+      }
+
+      /* 결과 없음 */
+      .no-result {
+        width: 100%;
+        text-align: center;
+        padding: 80px 0;
+        color: #999;
+      }
+
+      .no-result p {
+        font-size: 16px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .no-result a {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #0d5611;
+        color: #fff;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+
+      /* 카드 그리드 */
+      .result-grid {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .product-card {
+        width: 260px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .product-card img {
+        width: 100%;
+        border-radius: 6px;
+        margin-bottom: 8px;
+      }
+
+      .product-card h4 { font-size: 16px; color: #000; }
+      .product-card p  { font-size: 13px; color: #666; }
+      .product-card h5 { font-size: 16px; color: #000; }
+
+      .product-card .badge {
+        display: inline-block;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 20px;
+        background: #e8f5e9;
+        color: #0d5611;
+        margin-bottom: 4px;
+        width: fit-content;
+      }
+
+      /* 로딩 스피너 */
+      .loading {
+        width: 100%;
+        text-align: center;
+        padding: 80px 0;
+        color: #888;
+        font-size: 15px;
+      }
+
+      /* ===== Footer ===== */
+      footer {
+        min-height: 200px;
+        display: flex;
+        gap: 40px;
+      }
+
+      .footer-left { flex: 1; }
+      .footer-right { flex: 2; }
+
+      .footer-left p,
+      .footer-right p {
+        margin: 5px 0;
+        line-height: 1.5;
+        text-align: left;
+        font-size: 12px;
+      }
+
+      .footer-left .tel {
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .footer-right .links a {
+        margin: 0 5px;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .footer-right .links a:hover { text-decoration: underline; }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="container">
+      <div class="search-box">
+        <input id="searchInput" type="text" placeholder="반찬을 입력해주세요" />
+        <button id="searchBtn" type="button">
+          <img src="img/search_icon.png" alt="검색" />
+        </button>
+      </div>
+      <div class="logo"><img src="img/logo.png" alt="집반찬연구소" /></div>
+      <div class="right-box">
+        <div class="login">
+          <ul>
+            <li><a href="#">로그인</a></li>
+            <li><a href="#">회원가입</a></li>
+            <li><a href="#">고객센터</a></li>
+          </ul>
+        </div>
+        <nav class="menu">
+          <ul>
+            <li><a href="index_5_js.html"><img src="img/icon1.png" alt="" />브랜드</a></li>
+            <li><a href="index_5_js.html"><img src="img/icon2.png" alt="" />반찬보기</a></li>
+            <li><a href="#"><img src="img/icon3.png" alt="" />장바구니</a></li>
+            <li><a href="#"><img src="img/icon4.png" alt="" />내정보</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+      <div class="search-header">
+        <h2 id="resultTitle">검색 결과</h2>
+        <p id="resultCount"></p>
+      </div>
+
+      <div id="resultArea" class="result-grid">
+        <div class="loading">검색 중입니다...</div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="container">
+      <div class="footer-left">
+        <h4>고객센터</h4>
+        <p class="tel">1588-3754</p>
+        <p class="email">zipbanchan@sannamchon.co.kr</p>
+        <p class="time">
+          평일 08:30~17:30 / 토요일 08:30~12:00<br />
+          점심시간 12:00~13:00<br />
+          일요일, 공휴일은 휴무입니다.
+        </p>
+      </div>
+      <div class="footer-right">
+        <h4>집반찬연구소</h4>
+        <p>
+          인천광역시 서구 가석로 26(가좌동) 집반찬연구소 대표자: 박종철<br />
+          사업자등록번호: 121-86-17743 통신판매업 신고번호: 제
+          2023-인천서구-3834 호 개인정보보호책임자: 정문채<br />
+          제품 문의: zipbanchan@sannamchon.co.kr
+        </p>
+        <p class="links">
+          <a href="#">집반찬연구소 소개</a> | <a href="#">이용약관</a> |
+          <a href="#">개인정보처리방침</a>
+        </p>
+        <p class="copy">Copyright © SANNAMCHON CORP. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const BASE = "https://dino-21.github.io/zipbanchan/json/";
+
+      const SOURCES = [
+        { url: BASE + "01_banchan.json",    label: "알뜰반찬" },
+        { url: BASE + "02_kidbanchan.json", label: "어린이반찬" },
+        { url: BASE + "03_newbanchan.json", label: "새로운반찬" },
+        { url: BASE + "04_mdbanchan.json",  label: "MD추천" },
+      ];
+
+      // URL 쿼리에서 검색어 파싱
+      function getQuery() {
+        return new URLSearchParams(location.search).get("q") || "";
+      }
+
+      // 검색 실행 (현재 페이지 reload)
+      function doSearch() {
+        const q = document.getElementById("searchInput").value.trim();
+        if (!q) return;
+        location.href = "search.html?q=" + encodeURIComponent(q);
+      }
+
+      // 카드 생성
+      function createCard(item, label) {
+        const a = document.createElement("a");
+        a.href = "#";
+
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <span class="badge">${label}</span>
+          <img src="${item.main_img}" alt="${item.name}" />
+          <h4>${item.name}</h4>
+          <p>${item.description}</p>
+          <h5>${Number(item.price).toLocaleString()}원</h5>
+        `;
+
+        a.appendChild(card);
+        return a;
+      }
+
+      // 메인 검색 로직
+      async function search(query) {
+        const resultArea  = document.getElementById("resultArea");
+        const resultTitle = document.getElementById("resultTitle");
+        const resultCount = document.getElementById("resultCount");
+
+        resultArea.innerHTML = '<div class="loading">검색 중입니다...</div>';
+        resultTitle.innerHTML = `"<span>${query}</span>" 검색 결과`;
+
+        // 모든 JSON 병렬 로딩
+        const responses = await Promise.allSettled(
+          SOURCES.map((s) => fetch(s.url).then((r) => r.json()).then((data) => ({ data, label: s.label })))
+        );
+
+        const matched = [];
+
+        responses.forEach((res) => {
+          if (res.status !== "fulfilled") return;
+          const { data, label } = res.value;
+          data.forEach((item) => {
+            const haystack = (item.name + " " + item.description).toLowerCase();
+            if (haystack.includes(query.toLowerCase())) {
+              matched.push({ item, label });
+            }
+          });
+        });
+
+        resultArea.innerHTML = "";
+
+        if (matched.length === 0) {
+          resultCount.textContent = "";
+          resultArea.innerHTML = `
+            <div class="no-result">
+              <p>"${query}"에 해당하는 반찬이 없습니다.</p>
+              <a href="index_5_js.html">전체 반찬 보기</a>
+            </div>
+          `;
+          return;
+        }
+
+        resultCount.textContent = `총 ${matched.length}개의 반찬을 찾았습니다.`;
+        matched.forEach(({ item, label }) => {
+          resultArea.appendChild(createCard(item, label));
+        });
+      }
+
+      // 초기화
+      const query = getQuery();
+
+      if (query) {
+        document.getElementById("searchInput").value = query;
+        search(query);
+      } else {
+        document.getElementById("resultTitle").textContent = "검색어를 입력해주세요";
+        document.getElementById("resultArea").innerHTML = "";
+      }
+
+      // 검색 버튼 / 엔터 키 이벤트
+      document.getElementById("searchBtn").addEventListener("click", doSearch);
+      document.getElementById("searchInput").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") doSearch();
+      });
+    </script>
+  </body>
+</html>
